@@ -185,11 +185,11 @@ function UsersContent() {
 
   const [duration, setDuration] = React.useState([]);
   useEffect(() => {
-    HTTP.get("/mongo/query/vU41")
+    HTTP.get("/mongo/query/duration/now")
       .then(function (response) {
         // handle success
         setDuration(response.data);
-        console.log("durrr", response)
+        console.log("res",duration)
       })
       .catch(function (error) {
         // handle error
@@ -200,7 +200,7 @@ function UsersContent() {
       });
   }, []);
 
-  var avgTime = duration.map((d) => d.avgTime);
+  var avgTime = duration.map((d) => d.averageTimeSpent);
   const minutes = Math.floor(avgTime / 60);
   const seconds = avgTime % 60;
   console.log("avg = ", avgTime);
@@ -278,7 +278,7 @@ function UsersContent() {
               height: "auto",
             }}
           >
-            <Title>OOrtalama Geçirilen Süre ( Kişi / Sayfada Kalma Zamanı )</Title>{" "}
+            <Title>Ortalama Geçirilen Süre ( Kişi / Sayfada Kalma Zamanı )</Title>{" "}
             <Typography variant="h4">
               {` ${padTo2Digits(minutes)} dk. ${Math.floor(
                 padTo2Digits(seconds)
