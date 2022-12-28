@@ -101,7 +101,20 @@ function DashboardContent() {
   };
   // harita data
   const [chartData, setChartData] = useState("");
-  const optionsBar = {
+  const optionsBarForDevice = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        display: false,
+      },
+      title: {
+        display: true,
+        text: "Cihaz Dağılımı",
+      },
+    },
+  };
+  const optionsBarForCategory = {
     responsive: true,
     plugins: {
       legend: {
@@ -260,7 +273,7 @@ function DashboardContent() {
           >
             <Title>Popüler Kategoriler</Title>
             {isRequestPending ? <Loader /> :
-              <Bar options={optionsBar} data={dataCategory} />
+              <Bar options={optionsBarForCategory} data={dataCategory} />
             }
           </Paper>
         </Grid>
@@ -278,7 +291,7 @@ function DashboardContent() {
           >
             <Title>Cihaz Dağılımı</Title>
             {isRequestPending ? <Loader /> :
-              <Bar options={optionsBar} data={data} />
+              <Bar options={optionsBarForDevice} data={data} />
             }
           </Paper>
         </Grid>
