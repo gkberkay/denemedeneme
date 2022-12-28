@@ -140,7 +140,7 @@ const Layout = ({ children }) => {
                             >
                                 <AccountCircleIcon style={{ width: "100%", height: "60%" }} />
                             </IconButton>
-                            {userProfile ? null : <ProfileInfo ref={wrapperRef} />}
+                            {userProfile ? null : <ProfileInfo  />}
                         </Toolbar>
                     </AppBar>
                     <Drawer variant="permanent" open={open}>

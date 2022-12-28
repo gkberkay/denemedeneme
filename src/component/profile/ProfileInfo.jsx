@@ -6,7 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ closeOutside }) => {
+
+    const [userProfile, setUserProfile] = React.useState(true);
+    // const editToggle = () => {
+    //     setUserProfile((userProfile) => !userProfile);
+    // };
+
     const navigate = useNavigate()
     const cookies = new Cookies();
 
@@ -17,7 +23,8 @@ const ProfileInfo = () => {
 
     }
     return (
-        <div className='profile'>
+
+        <div ref={closeOutside} className='profile'>
             <div className='profileInfo'>
                 <ol className='deneme'>
                     <li><Link to="/mainpage/editprofile">Profili Düzenle</Link></li>
@@ -26,6 +33,8 @@ const ProfileInfo = () => {
                 </ol>
             </div>
         </div>
+
+
     )
 }
 

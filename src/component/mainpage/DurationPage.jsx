@@ -41,35 +41,34 @@ export default function DurationPage() {
     }, [mainPageSelectedDate])
 
     return (
-        <>
+        <React.Fragment>
+            <Title>En Çok Etkileşimi Olan Sayfalar</Title>
             {isRequestPending ? <Loader /> :
-                <React.Fragment>
-                    <Title>En Çok Etkileşimi Olan Sayfalar</Title>
-                    <Table size="small">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Url</TableCell>
-                                <TableCell>Ziyaret Sayısı</TableCell>
+                <Table size="small">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Url</TableCell>
+                            <TableCell>Ziyaret Sayısı</TableCell>
 
-                                <TableCell align="right">Ortalama Geçirilen Süre</TableCell>
+                            <TableCell align="right">Ortalama Geçirilen Süre</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {duration.map((row) => (
+                            <TableRow key={row.newsUrl}>
+                                <TableCell><a href={`${row.newsUrl}`}>{`${row.newsUrl} `}</a> </TableCell>
+                                <TableCell>{row.count}</TableCell>
+                                <TableCell align="right">{Math.floor(row.avgTime)} sn</TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {duration.map((row) => (
-                                <TableRow key={row.newsUrl}>
-                                    <TableCell><a href={`${row.newsUrl}`}>{`${row.newsUrl} `}</a> </TableCell>
-                                    <TableCell>{row.count}</TableCell>
-                                    <TableCell align="right">{Math.floor(row.avgTime)}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-                        Diğerlerini Gör
-                    </Link>
-                </React.Fragment>
-
+                        ))}
+                    </TableBody>
+                </Table>
             }
-        </>
+            <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+                Diğerlerini Gör
+            </Link>
+
+        </React.Fragment>
+
     );
 }

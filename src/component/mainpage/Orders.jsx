@@ -42,34 +42,34 @@ export default function Orders() {
             });
     }, [mainPageSelectedDate])
     return (
-        <>
-            {isRequestPending ? <Loader /> :
-                <React.Fragment>
-                    <Title>En Çok Okunan Haberler</Title>
-                    <Table size="small">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Haber Başlığı</TableCell>
-                                <TableCell>Kategori</TableCell>
 
-                                <TableCell align="right">Ziyaret Sayısı</TableCell>
+        <React.Fragment>
+            <Title>En Çok Okunan Haberler</Title>
+            {isRequestPending ? <Loader /> :
+                <Table size="small">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Haber Başlığı</TableCell>
+                            <TableCell>Kategori</TableCell>
+
+                            <TableCell align="right">Ziyaret Sayısı</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {datas.map((row) => (
+                            <TableRow key={row.newsTitle}>
+                                <TableCell><a href={`http://localhost:53227/${row.category === undefined ? "" : row.category + "/"}${row.subCategory === undefined ? "/" : row.subCategory}${"/" + row.newsTitle}`} target='_blank' rel="noopener noreferrer" >{`${row.category === undefined ? "" : "/" + row.category}${row.subCategory === undefined ? "/" : "/" + row.subCategory}${"/" + row.newsTitle}`}</a> </TableCell>
+                                <TableCell>{row.subCategory}</TableCell>
+                                <TableCell align="right">{row.totalCount}</TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {datas.map((row) => (
-                                <TableRow key={row.newsTitle}>
-                                    <TableCell><a href={`http://localhost:53227/${row.category === undefined ? "" :  row.category+"/" }${row.subCategory === undefined ? "/" :row.subCategory}${"/" + row.newsTitle}`} target='_blank' rel="noopener noreferrer" >{`${row.category === undefined ? "" : "/" + row.category}${row.subCategory === undefined ? "/" : "/" + row.subCategory}${"/" + row.newsTitle}`}</a> </TableCell>
-                                    <TableCell>{row.subCategory}</TableCell>
-                                    <TableCell align="right">{row.totalCount}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-                        Diğerlerini Gör
-                    </Link>
-                </React.Fragment>
+                        ))}
+                    </TableBody>
+                </Table>
             }
-        </>
+            <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+                Diğerlerini Gör
+            </Link>
+        </React.Fragment>
+
     );
 }

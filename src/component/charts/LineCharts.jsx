@@ -133,7 +133,13 @@ export function LineCharts() {
     useEffect(() => {
         (async () => {
             const response = await makeRequest(HTTP.get(`/mongo/query/users/${mainPageSelectedDate}`));
-            setChartData(response.data[0].users);
+            if (response.data.length == 0) {
+                setChartData(response.data)
+            } else {
+                setChartData(response.data[0].users);
+
+            }
+            console.log(response.data.length)
         })()
     }, [mainPageSelectedDate]);
 

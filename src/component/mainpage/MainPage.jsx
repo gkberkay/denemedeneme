@@ -234,7 +234,6 @@ function DashboardContent() {
   var avgTime = duration.map((d) => d.averageTimeSpent);
   const minutes = Math.floor(avgTime / 60);
   const seconds = avgTime % 60;
-  console.log("avg = ", avgTime);
   function padTo2Digits(num) {
     return num.toString().padStart(1, "0");
   }
