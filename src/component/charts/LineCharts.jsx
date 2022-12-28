@@ -26,7 +26,12 @@ ChartJS.register(
     Legend
 );
 
-export const options = {
+const options = {
+    scales: {
+        y: {
+            beginAtZero: true
+        }
+    },
     responsive: true,
     plugins: {
         legend: {
@@ -36,7 +41,7 @@ export const options = {
             display: false,
             text: 'Chart.js Line Chart',
         },
-    },
+    }
 };
 
 //FOR 90 DAY --START

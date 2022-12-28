@@ -55,7 +55,7 @@ export default function Country() {
                         <TableBody>
                             {datas.map((row) => (
                                 <TableRow key={row._id}>
-                                    <TableCell><a href={`${row._id}`}>{`${row._id}`}</a></TableCell>
+                                    <TableCell><a href={`${row.referrer}`}>{`${row.referrer}`}</a></TableCell>
                                     <TableCell>{row.uniqueUser}</TableCell>
                                     <TableCell align="right">{row.totalCount}</TableCell>
                                 </TableRow>
