@@ -116,7 +116,7 @@ function DashboardContent() {
   };
   useEffect(() => {
     (async () => {
-      const response = await HTTP.get(`/mongo/query/category/${mainPageSelectedDate}`);
+      const response = await makeRequest(HTTP.get(`/mongo/query/category/${mainPageSelectedDate}`));
       setChartData(response.data);
     })()
   }, [mainPageSelectedDate]);
@@ -259,7 +259,9 @@ function DashboardContent() {
             }}
           >
             <Title>Popüler Kategoriler</Title>
-            <Bar options={optionsBar} data={dataCategory} />
+            {isRequestPending ? <Loader /> :
+              <Bar options={optionsBar} data={dataCategory} />
+            }
           </Paper>
         </Grid>
 
@@ -275,7 +277,9 @@ function DashboardContent() {
             }}
           >
             <Title>Cihaz Dağılımı</Title>
-            <Bar options={optionsBar} data={data} />
+            {isRequestPending ? <Loader /> :
+              <Bar options={optionsBar} data={data} />
+            }
           </Paper>
         </Grid>
 
@@ -291,22 +295,24 @@ function DashboardContent() {
             }}
           >
             <Title>Ziyaretçi Dağılımı</Title>
-            <Chart
-              chartEvents={[
-                {
-                  eventName: "select",
-                  callback: ({ chartWrapper }) => {
-                    const chart = chartWrapper.getChart();
-                    const selection = chart.getSelection();
-                    if (selection.length === 0) return;
-                    // const region = data[selection[0].row + 1];
+            {isRequestPending ? <Loader /> :
+              <Chart
+                chartEvents={[
+                  {
+                    eventName: "select",
+                    callback: ({ chartWrapper }) => {
+                      const chart = chartWrapper.getChart();
+                      const selection = chart.getSelection();
+                      if (selection.length === 0) return;
+                      // const region = data[selection[0].row + 1];
+                    },
                   },
-                },
-              ]}
-              chartType="GeoChart"
-              data={results}
-              options={geo.length > 0 ? optionsForMap : optionsForMap1}
-            />
+                ]}
+                chartType="GeoChart"
+                data={results}
+                options={geo.length > 0 ? optionsForMap : optionsForMap1}
+              />
+            }
           </Paper>
         </Grid>
 
@@ -322,7 +328,10 @@ function DashboardContent() {
               height: 400,
             }}
           >
-            <Country />
+            <Title >Ziyaretçiler</Title>
+            {isRequestPending ? <Loader /> :
+              <Country />
+            }
           </Paper>
         </Grid>
 
@@ -337,11 +346,13 @@ function DashboardContent() {
             }}
           >
             <Title>Ortalama Geçirilen Süre ( Kişi /Sayfada Kalma Zamanı )</Title>{" "}
-            <Typography variant="h4">
-              {` ${padTo2Digits(minutes)} dk. ${Math.floor(
-                padTo2Digits(seconds)
-              )} sn.`}{" "}
-            </Typography>
+            {isRequestPending ? <Loader /> :
+              <Typography variant="h4">
+                {` ${padTo2Digits(minutes)} dk. ${Math.floor(
+                  padTo2Digits(seconds)
+                )} sn.`}{" "}
+              </Typography>
+            }
           </Paper>
         </Grid>
 

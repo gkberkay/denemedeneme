@@ -7,9 +7,13 @@ import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 import HTTP from '../../main-source/MainSource'
 import AppContext from "../core/AppContext"
-
+import { useApi } from '../core/hooks/useApi';
+import Loader from "../loading/Loading"
 
 export default function Country() {
+
+    const { makeRequest, apiState: { isRequestPending, data: cengo } } = useApi();
+
 
     const { appState: { mainPageSelectedDate } } = useContext(AppContext)
 
@@ -32,25 +36,26 @@ export default function Country() {
     return (
 
         <React.Fragment>
-            <Title >Ziyaretçiler</Title>
-            <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Ülke</TableCell>
-                        <TableCell>Farklı Ziyaretçi</TableCell>
-                        <TableCell align="right">Toplam Ziyaret Sayısı</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {datas.map((row) => (
-                        <TableRow key={row.country}>
-                            <TableCell><a href={`${row.country}`}>{`${row.country}`}</a></TableCell>
-                            <TableCell>{row.userCount}</TableCell>
-                            <TableCell align="right">{row.totalVisit}</TableCell>
+
+                <Table size="small">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Ülke</TableCell>
+                            <TableCell>Farklı Ziyaretçi</TableCell>
+                            <TableCell align="right">Toplam Ziyaret Sayısı</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHead>
+                    <TableBody>
+                        {datas.map((row) => (
+                            <TableRow key={row.country}>
+                                <TableCell><a href={`${row.country}`}>{`${row.country}`}</a></TableCell>
+                                <TableCell>{row.userCount}</TableCell>
+                                <TableCell align="right">{row.totalVisit}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            
         </React.Fragment>
 
     );

@@ -3,7 +3,11 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Title from './Title';
 import DropDownBox from '../dropdownBox/DropDownBox';
-import  {LineCharts}  from '../charts/LineCharts';
+import { LineCharts } from '../charts/LineCharts';
+import { useApi } from '../core/hooks/useApi';
+import Loader from "../loading/Loading"
+
+
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -11,24 +15,28 @@ import  {LineCharts}  from '../charts/LineCharts';
 
 export default function Deposits({ props, onlineUser }) {
 
+    const { makeRequest, apiState: { isRequestPending, data: cengo } } = useApi();
 
-    return (
-
-        <React.Fragment>
-            <Title>{props}</Title>
-            {/* <Typography component="p" variant="h4">
+    {/* <Typography component="p" variant="h4">
             {onlineUser}
         </Typography> */}
-            {/* <Typography color="text.secondary" sx={{ flex: 1 }}>
+    {/* <Typography color="text.secondary" sx={{ flex: 1 }}>
             30dk içinde güncellenir.
         </Typography> */}
-            <Typography>
-                <LineCharts />
-            </Typography>
-            <div>
-            </div>
-        </React.Fragment>
 
+    return (
+        <React.Fragment>
+            <Title>{props}</Title>
+
+            {isRequestPending ? <Loader /> :
+
+                <Typography>
+                    <LineCharts />
+                </Typography>
+
+
+            }
+        </React.Fragment>
 
     );
 }
