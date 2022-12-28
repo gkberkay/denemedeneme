@@ -1,0 +1,39 @@
+.profile {
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    width: 10%;
+    height: 10vw;
+    right: 3.5%;
+    top: 45%;
+    z-index: -500;
+    font-size: 14px
+}
+.profileInfo {
+    margin: 15px 5px 5px 0px;
+}
+.deneme {
+    list-style: none;
+}
+ol>li {
+    margin: 15px 0 0 0;
+}
+ol>li * {
+    color: #000;
+    cursor: pointer;
+}
+ol>li:first-child {
+    margin-top: 30px;
+}
+@media (max-width:768px) {
+    .profile {
+        background-color: #fff;
+        color: #000;
+        width: 40%;
+        height: 30vw;
+        right: 13%;
+        top: 45%;
+        z-index: -500;
+        font-size: 14px
+    }
+}
