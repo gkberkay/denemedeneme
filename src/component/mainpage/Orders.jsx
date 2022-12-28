@@ -58,7 +58,7 @@ export default function Orders() {
                         <TableBody>
                             {datas.map((row) => (
                                 <TableRow key={row.newsTitle}>
-                                    <TableCell><a href={`${row.newsTitle}`}>{`${row.newsTitle}`}</a> </TableCell>
+                                    <TableCell><a href={`http://localhost:53227/${row.category === undefined ? "" :  row.category+"/" }${row.subCategory === undefined ? "/" :row.subCategory}${"/" + row.newsTitle}`} target='_blank' rel="noopener noreferrer" >{`${row.category === undefined ? "" : "/" + row.category}${row.subCategory === undefined ? "/" : "/" + row.subCategory}${"/" + row.newsTitle}`}</a> </TableCell>
                                     <TableCell>{row.subCategory}</TableCell>
                                     <TableCell align="right">{row.totalCount}</TableCell>
                                 </TableRow>
